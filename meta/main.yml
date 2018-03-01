@@ -1,0 +1,27 @@
+dependencies: []
+
+galaxy_info:
+  short_description: Provides a lookup plugin for Conjur
+  description: Provides access to Conjur variables through a lookup plugin (for backward compatibility only)
+  company: CyberArk
+  license: Apache
+  author:
+    - Dustin Collins (@dustinmm80)
+    - Oren Ben Meir (@orenbm)
+    - Jason Vanderhoof (@jvanderhoof)
+    - Kumbirai Tanekha (@doodlesbykumbi)
+    - Gary Moon (@garymoon)
+
+  min_ansible_version: '2.3'
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+
+  galaxy_tags:
+    - machine-identity
+    - cyberark
+    - conjur
+    - security
