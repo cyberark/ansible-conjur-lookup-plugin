@@ -4,7 +4,7 @@ This Ansible plugin provides the ability to look up Conjur values in playbooks. 
 
 Based on the Ansible controlling host's identity, secrets can be retrieved securely using this plugin. This approach provides a simple alternative to the Ansible Vault, but usage of this plugin is recommended only as part of a soft migration to Conjur in existing Ansible playbooks, and efforts should be made to migrate to [Summon](https://github.com/cyberark/summon) as soon as practically possible.
 
-**Note**: For Conjur v5, this plugin is included with Ansible >= 4.5.0.0. v4 support will be available soon.
+**Note**: For Conjur v5, this plugin is included with Ansible >= 2.5.0.0. v4 support will be available soon.
 
 To assign machine identity to nodes being controlled by ansible, see the [Conjur Ansible Role](https://github.com/cyberark/ansible-role-conjur/).
 
