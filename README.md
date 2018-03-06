@@ -2,7 +2,7 @@
 
 This Ansible plugin provides the ability to look up Conjur values in playbooks. It supports Conjur v4 and v5.
 
-**Note**: For v5, this capability is included with Ansible >= 4.5.0.0 (v4 support coming soon).
+**Note**: For v5, this capability is included with Ansible >= 2.5.0.0 (v4 support coming soon).
 
 Based on the controlling host's identity, secrets can then be retrieved securely using the
 `retrieve_conjur_variable` lookup plugin. Usage of this plugin is recommended only as part of a soft migration to Conjur in existing Ansible playbooks,
