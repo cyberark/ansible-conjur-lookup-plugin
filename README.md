@@ -23,6 +23,15 @@ Install the Conjur role using the following syntax:
 $ ansible-galaxy install cyberark.conjur-lookup-plugin
 ```
 
+### Testing
+
+To run the tests:
+
+```sh-session
+$ cd tests
+$ ./test.sh
+```
+
 ## Requirements
 
 * A running Conjur service that is accessible from the Ansible controlling host.

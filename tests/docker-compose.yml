@@ -1,0 +1,60 @@
+version: '3.5'
+services:
+  ansible:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      CONJUR_APPLIANCE_URL: ${ANSIBLE_CONJUR_APPLIANCE_URL}
+      CONJUR_ACCOUNT: cucumber
+      CONJUR_AUTHN_LOGIN: host/ansible/ansible-master
+      CONJUR_AUTHN_API_KEY: ${ANSIBLE_CONJUR_AUTHN_API_KEY}
+      CONJUR_CUSTOM_AUTHN_API_KEY: ${CUSTOM_CONJUR_AUTHN_API_KEY}
+      COMPOSE_PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+      CONJUR_VERSION: ${ANSIBLE_CONJUR_VERSION}
+      CONJUR_CERT_FILE: ${ANSIBLE_CONJUR_CERT_FILE}
+    volumes:
+      - ..:/root/.ansible/roles/cyberark.conjur-lookup-plugin
+      - ..:/conjurinc
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  pg5:
+    image: postgres:9.3
+
+  conjur5:
+    image: cyberark/conjur
+    command: server -a cucumber -p 3000
+    environment:
+      CONJUR_APPLIANCE_URL: http://localhost:3000
+      DATABASE_URL: postgres://postgres@pg5/postgres
+      CONJUR_DATA_KEY: "W0BuL8iTr/7QvtjIluJbrb5LDAnmXzmcpxkqihO3dXA="
+
+  conjur5_cli:
+    image: conjurinc/cli5
+    entrypoint: []
+    command: /sbin/init
+    environment:
+      CONJUR_APPLIANCE_URL: http://conjur5:3000
+      CONJUR_ACCOUNT: cucumber
+      CONJUR_AUTHN_LOGIN: admin
+      CONJUR_AUTHN_API_KEY: ${CLI_CONJUR5_AUTHN_API_KEY}
+    volumes:
+      - ./policy:/policy
+
+  conjur5_proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile_nginx
+    entrypoint: nginx-debug -g 'daemon off;'
+    environment:
+        TERM: xterm
+
+  conjur:
+    image: registry2.itci.conjur.net/conjur-appliance-cuke-master:4.9-stable
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      CONJUR_APPLIANCE_URL: https://localhost/api
+      CONJUR_ACCOUNT: cucumber
+    volumes:
+      - ./policy:/policy
