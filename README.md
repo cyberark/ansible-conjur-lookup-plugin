@@ -1,4 +1,6 @@
-# Ansible Lookup Plugin
+# Ansible Lookup Plugin [DEPRECATED]
+
+The lookup functionality encapsulated here is now part of Ansible core.  This plugin is no longer needed.
 
 This Ansible plugin provides the ability to look up Conjur values in playbooks. It supports Conjur v4 and v5.
 
